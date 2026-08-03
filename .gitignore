@@ -1,0 +1,11 @@
+node_modules/
+.env
+.env.local
+accesstokens.env
+*.log
+.DS_Store
+.shots/
+
+# Scraped Alibaba product page download
+2025 Custom Square Acrylic Qr & Tap Nfc Google Review Card Sticker For Facebook - Buy Product on Alibaba.com.html
+2025 Custom Square Acrylic Qr & Tap Nfc Google Review Card Sticker For Facebook - Buy Product on Alibaba.com_files/

@@ -1,0 +1,21 @@
+{
+  "name": "trusttaps",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Landing page and Stripe checkout for the TrustTaps Google Review NFC card",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "qrcode": "^1.5.4",
+    "stripe": "^19.1.0"
+  }
+}
