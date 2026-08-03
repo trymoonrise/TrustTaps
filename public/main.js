@@ -60,12 +60,6 @@ if (form) {
     event.preventDefault();
     showError('');
 
-    const reviewLink = document.getElementById('review-link');
-    if (reviewLink && reviewLink.value && !/^https?:\/\/\S+$/i.test(reviewLink.value.trim())) {
-      showError('That review link does not look like a URL. Leave it blank if you are not sure.');
-      return;
-    }
-
     const originalLabel = checkoutBtn.innerHTML;
     checkoutBtn.disabled = true;
     checkoutBtn.textContent = 'Redirecting…';
@@ -76,7 +70,7 @@ if (form) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           quantity: clampQty(qtyInput.value),
-          reviewLink: reviewLink ? reviewLink.value.trim() : '',
+          reviewLink: '',
         }),
       });
 
