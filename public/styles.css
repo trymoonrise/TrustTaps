@@ -1,11 +1,15 @@
 :root {
-  --ink: #0a0f1a;
-  --muted: #66758c;
-  --line: #e8ebf0;
+  --bg: #f7f8fb;
+  --ink: #0b1220;
+  --muted: #5c6b82;
+  --line: #e5eaf2;
   --blue: #1d4ed8;
-  --nav: 64px;
-  --pad: clamp(16px, 4vw, 40px);
+  --blue-deep: #1e40af;
+  --nav: 72px;
+  --pad: clamp(20px, 4.5vw, 48px);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --shadow-btn: 0 10px 28px rgba(29, 78, 216, 0.22);
+  --shadow-card: 0 28px 56px rgba(15, 35, 80, 0.14);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -21,8 +25,9 @@ body {
   font-family: Manrope, ui-sans-serif, system-ui, sans-serif;
   color: var(--ink);
   background:
-    radial-gradient(ellipse 90% 55% at 50% -15%, #e8efff, transparent 55%),
-    #fff;
+    radial-gradient(ellipse 70% 45% at 18% 18%, rgba(29, 78, 216, 0.07), transparent 60%),
+    radial-gradient(ellipse 55% 40% at 88% 72%, rgba(59, 130, 246, 0.05), transparent 55%),
+    var(--bg);
   -webkit-font-smoothing: antialiased;
   overflow-x: clip;
 }
@@ -38,13 +43,11 @@ p { margin: 0; }
 
 h1 {
   margin: 0;
-  font-size: clamp(1.6rem, 1.2rem + 2.2vw, 2.75rem);
-  font-weight: 800;
-  letter-spacing: -0.045em;
-  line-height: 1.12;
-  max-width: 100%;
-  overflow-wrap: balance;
-  text-wrap: balance;
+  font-size: clamp(1.55rem, 1.2rem + 1.6vw, 2.15rem);
+  font-weight: 750;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+  color: var(--ink);
 }
 
 :focus-visible {
@@ -52,37 +55,40 @@ h1 {
   outline-offset: 3px;
 }
 
+/* ---------- nav ---------- */
 .nav {
   min-height: var(--nav);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 16px;
   padding:
-    max(8px, env(safe-area-inset-top, 0px))
+    max(10px, env(safe-area-inset-top, 0px))
     max(var(--pad), env(safe-area-inset-right, 0px))
-    8px
+    10px
     max(var(--pad), env(safe-area-inset-left, 0px));
 }
 
 .brand {
   text-decoration: none;
   font-weight: 800;
-  font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.25rem);
+  font-size: clamp(1.15rem, 1rem + 0.55vw, 1.4rem);
   letter-spacing: -0.05em;
   color: var(--blue);
-  flex-shrink: 0;
 }
 
+.brand:hover { opacity: 0.8; }
+
+/* ---------- buttons ---------- */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.3em;
-  padding: 0.7em 1.15em;
+  gap: 0.35em;
+  padding: 0.65em 1.2em;
   border-radius: 999px;
   font: inherit;
-  font-size: clamp(0.86rem, 0.8rem + 0.25vw, 0.95rem);
+  font-size: 0.92rem;
   font-weight: 650;
   line-height: 1.2;
   text-decoration: none;
@@ -92,23 +98,32 @@ h1 {
   background: transparent;
   white-space: nowrap;
   max-width: 100%;
-  transition: transform 0.2s var(--ease), background 0.2s ease, opacity 0.2s ease;
+  transition: transform 0.2s var(--ease), background 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 }
 
 .btn:hover { transform: translateY(-1px); }
 .btn:active { transform: scale(0.98); }
-.btn[disabled] { opacity: 0.55; cursor: progress; transform: none; }
+.btn[disabled] { opacity: 0.55; cursor: progress; transform: none; box-shadow: none; }
 
 .btn-fill {
   background: var(--blue);
   color: #fff;
+  box-shadow: var(--shadow-btn);
 }
 
-.btn-fill:hover { background: #1e40af; }
+.btn-fill:hover { background: var(--blue-deep); }
+
+.btn-quiet {
+  color: var(--muted);
+  font-weight: 600;
+  padding-inline: 0.5em;
+}
+
+.btn-quiet:hover { color: var(--ink); transform: none; }
 
 .btn-lg {
-  padding: 0.9em 1.5em;
-  font-size: clamp(0.95rem, 0.88rem + 0.35vw, 1.05rem);
+  padding: 0.95em 1.65em;
+  font-size: 1.02rem;
 }
 
 .btn-block {
@@ -117,121 +132,120 @@ h1 {
 }
 
 .lede {
-  margin-top: 12px;
-  font-size: clamp(0.95rem, 0.9rem + 0.35vw, 1.1rem);
-  line-height: 1.45;
+  margin-top: 14px;
+  font-size: clamp(1rem, 0.95rem + 0.3vw, 1.12rem);
+  line-height: 1.5;
   color: var(--muted);
   font-weight: 500;
-  max-width: 32ch;
+  max-width: 28ch;
 }
 
 .brand-mark {
-  font-size: clamp(2.2rem, 1.4rem + 5vw, 4rem);
+  margin: 0 0 8px;
+  font-size: clamp(2.6rem, 1.6rem + 5.5vw, 4.4rem);
   font-weight: 800;
   letter-spacing: -0.06em;
-  line-height: 0.95;
+  line-height: 0.92;
   color: var(--blue);
-  margin-bottom: 10px;
-  max-width: 100%;
 }
 
-/* ---------- home ---------- */
-.home {
-  width: min(1120px, 100%);
+/* ---------- hero ---------- */
+.hero {
+  width: min(1080px, 100%);
   margin: 0 auto;
+  min-height: calc(100svh - var(--nav) - 72px);
+  display: grid;
+  gap: clamp(28px, 5vw, 56px);
+  align-items: center;
+  justify-items: center;
+  text-align: center;
   padding:
-    clamp(8px, 2vw, 24px)
+    clamp(12px, 3vw, 32px)
+    max(var(--pad), env(safe-area-inset-right, 0px))
+    clamp(40px, 6vw, 64px)
+    max(var(--pad), env(safe-area-inset-left, 0px));
+  animation: rise 0.75s var(--ease) both;
+}
+
+.hero-card {
+  width: min(70vw, 300px);
+  aspect-ratio: 1;
+  object-fit: contain;
+  filter: drop-shadow(var(--shadow-card));
+}
+
+.hero-copy {
+  display: grid;
+  justify-items: center;
+  max-width: 28rem;
+}
+
+.hero-copy .btn { margin-top: 28px; }
+
+/* ---------- buy ---------- */
+.page-buy {
+  background:
+    radial-gradient(ellipse 60% 40% at 80% 0%, rgba(29, 78, 216, 0.06), transparent 55%),
+    #fff;
+}
+
+.page-buy .nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+}
+
+.buy {
+  width: min(1000px, 100%);
+  margin: 0 auto;
+  min-height: calc(100svh - var(--nav));
+  display: grid;
+  gap: clamp(24px, 4vw, 48px);
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+  padding:
+    clamp(8px, 2vw, 20px)
     max(var(--pad), env(safe-area-inset-right, 0px))
     clamp(48px, 8vw, 80px)
     max(var(--pad), env(safe-area-inset-left, 0px));
-  display: grid;
-  gap: clamp(20px, 4vw, 36px);
-  justify-items: center;
-  text-align: center;
-  animation: rise 0.7s var(--ease) both;
-}
-
-.home-card {
-  width: min(72vw, 280px);
-  aspect-ratio: 1;
-  object-fit: contain;
-  filter: drop-shadow(0 20px 36px rgba(15, 35, 80, 0.14));
-}
-
-.home .lede { margin-inline: auto; }
-.home > .btn { margin-top: 8px; }
-
-.how {
-  width: min(100%, 360px);
-  margin-top: clamp(12px, 3vw, 28px);
-  padding-top: clamp(20px, 3vw, 28px);
-  border-top: 1px solid var(--line);
-  display: grid;
-  gap: 12px;
-  text-align: left;
-}
-
-.how p {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.05rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-}
-
-.how span {
-  color: var(--blue);
-  font-weight: 800;
-  flex: none;
-  width: 1.25rem;
-}
-
-/* ---------- buy ---------- */
-.page-buy { background: #fff; }
-
-.buy {
-  width: min(1120px, 100%);
-  margin: 0 auto;
-  padding:
-    clamp(4px, 1.5vw, 16px)
-    max(var(--pad), env(safe-area-inset-right, 0px))
-    clamp(48px, 8vw, 88px)
-    max(var(--pad), env(safe-area-inset-left, 0px));
-  display: grid;
-  gap: clamp(16px, 3vw, 24px);
-  justify-items: center;
-  text-align: center;
-  animation: rise 0.7s var(--ease) both;
+  animation: rise 0.75s var(--ease) both;
 }
 
 .buy-card {
-  width: min(68vw, 260px);
+  width: min(68vw, 280px);
   aspect-ratio: 1;
   object-fit: contain;
-  filter: drop-shadow(0 16px 28px rgba(15, 35, 80, 0.12));
+  filter: drop-shadow(var(--shadow-card));
 }
 
-.buy h1 {
-  font-size: clamp(1.35rem, 1.1rem + 1.5vw, 1.9rem);
-  max-width: 16ch;
+.buy-copy {
+  width: min(100%, 360px);
+  display: grid;
+  justify-items: center;
+}
+
+.buy-copy h1 {
+  font-size: clamp(1.55rem, 1.25rem + 1.4vw, 2rem);
 }
 
 .price {
-  margin-top: 4px;
-  font-size: clamp(1.25rem, 1.1rem + 0.8vw, 1.55rem);
+  margin-top: 10px;
+  font-size: clamp(1.35rem, 1.2rem + 0.7vw, 1.65rem);
   font-weight: 750;
   letter-spacing: -0.03em;
   color: var(--blue);
 }
 
-.buy .lede {
-  margin: 4px auto 8px;
-  max-width: 28ch;
+.buy-copy .lede {
+  margin: 12px 0 28px;
+  max-width: 30ch;
 }
 
 .buy form {
-  width: min(100%, 340px);
+  width: 100%;
   display: grid;
   gap: 14px;
   justify-items: stretch;
@@ -242,8 +256,9 @@ h1 {
   align-items: center;
   justify-self: center;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 14px;
   overflow: hidden;
+  background: #fff;
   touch-action: manipulation;
 }
 
@@ -258,7 +273,7 @@ h1 {
   touch-action: manipulation;
 }
 
-.qty-btn:hover { background: #f4f6fa; }
+.qty-btn:hover { background: #f3f6fb; }
 
 .qty input {
   width: 48px;
@@ -270,6 +285,7 @@ h1 {
   font-weight: 700;
   font-size: 1.05rem;
   -moz-appearance: textfield;
+  background: transparent;
 }
 
 .qty input::-webkit-outer-spin-button,
@@ -283,12 +299,11 @@ h1 {
 }
 
 .fine {
-  margin: 0;
-  font-size: clamp(0.75rem, 0.72rem + 0.2vw, 0.82rem);
+  margin: 4px 0 0;
+  font-size: 0.8rem;
   color: var(--muted);
-  max-width: 30ch;
   line-height: 1.4;
-  justify-self: center;
+  text-align: center;
   text-wrap: pretty;
 }
 
@@ -305,25 +320,22 @@ h1 {
   margin: 0 auto;
 }
 
-.confirm .lede {
-  margin-inline: auto;
-  max-width: 30ch;
-}
-
-.confirm .btn { margin-top: 8px; }
+.confirm .lede { margin-inline: auto; max-width: 30ch; }
+.confirm .btn { margin-top: 10px; }
 
 .site-footer {
   padding:
-    24px
+    28px
     max(var(--pad), env(safe-area-inset-right, 0px))
-    calc(32px + env(safe-area-inset-bottom, 0px))
+    calc(36px + env(safe-area-inset-bottom, 0px))
     max(var(--pad), env(safe-area-inset-left, 0px));
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
-  gap: 10px 20px;
+  justify-content: space-between;
+  gap: 12px 24px;
   border-top: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.55);
 }
 
 .site-footer a {
@@ -341,81 +353,60 @@ h1 {
 }
 
 @keyframes rise {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ---------- tablet+ : side-by-side product + copy ---------- */
-@media (min-width: 720px) {
-  .home {
-    grid-template-columns: minmax(240px, 0.9fr) minmax(280px, 1.1fr);
-    align-items: center;
-    justify-items: start;
+/* ---------- desktop / tablet ---------- */
+@media (min-width: 800px) {
+  .hero {
+    grid-template-columns: minmax(280px, 1fr) minmax(300px, 1fr);
+    justify-items: stretch;
     text-align: left;
-    gap: clamp(36px, 6vw, 72px);
-    min-height: calc(100svh - var(--nav) - 120px);
+    gap: clamp(48px, 8vw, 96px);
   }
 
-  .home-card {
-    width: min(100%, 380px);
-    justify-self: center;
-    grid-row: 1 / span 5;
+  .hero-card {
+    width: min(100%, 440px);
+    justify-self: end;
   }
 
-  .brand-mark,
-  .home h1,
-  .home .lede,
-  .home > .btn,
-  .how {
-    grid-column: 2;
-  }
-
-  .home .lede { margin-inline: 0; }
-  .home > .btn { justify-self: start; }
-
-  .how {
-    width: min(100%, 320px);
-    margin-top: 20px;
+  .hero-copy {
+    justify-items: start;
+    justify-self: start;
+    align-content: center;
   }
 
   .buy {
-    grid-template-columns: minmax(220px, 0.9fr) minmax(260px, 1fr);
-    align-items: center;
-    justify-items: start;
+    grid-template-columns: minmax(260px, 1fr) minmax(280px, 1fr);
+    justify-items: stretch;
     text-align: left;
-    gap: clamp(32px, 5vw, 64px);
-    min-height: calc(100svh - var(--nav) - 40px);
+    gap: clamp(40px, 7vw, 80px);
   }
 
   .buy-card {
-    width: min(100%, 360px);
-    justify-self: center;
-    grid-row: 1 / span 5;
+    width: min(100%, 400px);
+    justify-self: end;
   }
 
-  .buy h1,
-  .price,
-  .buy .lede,
-  .buy form {
-    grid-column: 2;
+  .buy-copy {
+    justify-items: start;
+    justify-self: start;
+    align-content: center;
   }
 
-  .buy .lede { margin-inline: 0; }
-  .buy form { justify-items: stretch; }
   .qty { justify-self: start; }
-  .fine { justify-self: start; text-align: left; }
+  .fine { text-align: left; }
 }
 
-@media (min-width: 1024px) {
-  .home-card { width: min(100%, 420px); }
-  .buy-card { width: min(100%, 400px); }
+@media (min-width: 1100px) {
+  .hero-card { width: min(100%, 480px); }
+  .buy-card { width: min(100%, 420px); }
 }
 
-/* ---------- very small phones ---------- */
-@media (max-width: 360px) {
-  .btn-lg { padding: 0.85em 1.15em; }
-  .home-card { width: min(78vw, 240px); }
-  .buy-card { width: min(74vw, 220px); }
+@media (max-width: 380px) {
+  .btn-lg { padding: 0.85em 1.2em; font-size: 0.95rem; }
+  .brand-mark { font-size: clamp(2.2rem, 12vw, 2.8rem); }
 }
 
 @media (prefers-reduced-motion: reduce) {

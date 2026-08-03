@@ -16,29 +16,32 @@
 
 <header class="nav">
   <a class="brand" href="/">trusttaps</a>
+  <a class="btn btn-quiet" href="mailto:support@trusttaps.com">Support</a>
 </header>
 
 <main class="buy">
-  <img class="buy-card" src="/assets/card-hero.webp" alt="TrustTaps Google review NFC card" width="1200" height="1200" sizes="(min-width: 1024px) 400px, (min-width: 720px) 360px, 68vw" fetchpriority="high">
+  <img class="buy-card" src="/assets/card-hero.webp" alt="TrustTaps Google review NFC card" width="1200" height="1200" sizes="(min-width: 900px) 400px, (min-width: 720px) 340px, 68vw" fetchpriority="high">
 
-  <h1>Google Review Card</h1>
-  <p class="price"><span id="unit-price">$24.99</span></p>
-  <p class="lede">Customers tap their phone. Your Google review page opens.</p>
+  <div class="buy-copy">
+    <h1>Google Review Card</h1>
+    <p class="price"><span id="unit-price">$24.99</span></p>
+    <p class="lede">NFC + QR. Stick it on the counter. Customers tap. Done.</p>
 
-  <form id="buy-form" novalidate>
-    <div class="qty" aria-label="Quantity">
-      <button type="button" class="qty-btn" data-step="-1" aria-label="Decrease">−</button>
-      <input id="qty" name="quantity" type="number" value="1" min="1" max="50" inputmode="numeric" aria-label="Quantity">
-      <button type="button" class="qty-btn" data-step="1" aria-label="Increase">+</button>
-    </div>
+    <form id="buy-form" novalidate>
+      <div class="qty" aria-label="Quantity">
+        <button type="button" class="qty-btn" data-step="-1" aria-label="Decrease">−</button>
+        <input id="qty" name="quantity" type="number" value="1" min="1" max="50" inputmode="numeric" aria-label="Quantity">
+        <button type="button" class="qty-btn" data-step="1" aria-label="Increase">+</button>
+      </div>
 
-    <button class="btn btn-fill btn-lg btn-block" type="submit" id="checkout-btn">
-      Buy — <span id="total">$24.99</span>
-    </button>
+      <button class="btn btn-fill btn-lg btn-block" type="submit" id="checkout-btn">
+        Buy — <span id="total">$24.99</span>
+      </button>
 
-    <p class="form-error" id="form-error" role="alert" hidden></p>
-    <p class="fine">Free shipping · You’ll add your review link at checkout</p>
-  </form>
+      <p class="form-error" id="form-error" role="alert" hidden></p>
+      <p class="fine">Free shipping · Review link added at checkout</p>
+    </form>
+  </div>
 </main>
 
 <script src="/main.js"></script>
