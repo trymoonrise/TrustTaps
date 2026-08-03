@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Buy a Google Review Card — TrustTaps</title>
+<title>Buy — TrustTaps</title>
 <meta name="description" content="Order your Google Review NFC card. Pay securely with Stripe. Free shipping.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,74 +14,45 @@
 </head>
 <body class="page-buy">
 
-<header class="nav" id="nav">
+<header class="nav">
   <a class="brand" href="/">trusttaps</a>
-  <nav class="nav-links">
-    <a href="/#faq">FAQ</a>
-    <a class="btn btn-fill" href="mailto:support@trusttaps.com">Help</a>
-  </nav>
+  <a class="btn btn-ghost" href="mailto:support@trusttaps.com">Help</a>
 </header>
 
 <main class="shop">
-  <a class="back" href="/">← Home</a>
+  <img class="shop-card" src="/assets/card-hero.webp" alt="TrustTaps Google review NFC card" width="1200" height="1200" fetchpriority="high">
 
-  <div class="shop-grid">
-    <div class="gallery">
-      <figure class="gallery-main">
-        <img id="gallery-img" src="/assets/card-hero.webp" alt="TrustTaps Google review NFC card" width="1200" height="1200" fetchpriority="high">
-      </figure>
-      <div class="thumbs" role="tablist" aria-label="Product photos">
-        <button type="button" class="thumb is-active" role="tab" aria-selected="true" data-src="/assets/card-hero.webp" data-alt="TrustTaps Google review NFC card">
-          <img src="/assets/card-hero.webp" alt="" loading="lazy">
-        </button>
-        <button type="button" class="thumb" role="tab" aria-selected="false" data-src="/assets/card-back.webp" data-alt="3M adhesive back">
-          <img src="/assets/card-back.webp" alt="" loading="lazy">
-        </button>
-        <button type="button" class="thumb" role="tab" aria-selected="false" data-src="/assets/card-angle.webp" data-alt="Card at an angle">
-          <img src="/assets/card-angle.webp" alt="" loading="lazy">
-        </button>
+  <div class="shop-panel">
+    <h1>Google Review Card</h1>
+    <p class="price"><span id="unit-price">$24.99</span></p>
+    <p class="lede">NFC + QR. Stick it on the counter. Customers tap. Done.</p>
+
+    <form id="buy-form" novalidate>
+      <div class="field">
+        <span class="label">Quantity</span>
+        <div class="qty">
+          <button type="button" class="qty-btn" data-step="-1" aria-label="Decrease">−</button>
+          <input id="qty" name="quantity" type="number" value="1" min="1" max="50" inputmode="numeric" aria-label="Quantity">
+          <button type="button" class="qty-btn" data-step="1" aria-label="Increase">+</button>
+        </div>
       </div>
-    </div>
 
-    <div class="shop-panel">
-      <h1>Google Review Card</h1>
-      <p class="price"><span id="unit-price">$24.99</span></p>
-      <p class="lede">NFC + QR. Stick it on the counter. Customers tap. Done.</p>
+      <label class="field">
+        <span class="label">Google review link <em>optional</em></span>
+        <input id="review-link" name="reviewLink" type="url" placeholder="https://g.page/r/…/review" autocomplete="url">
+      </label>
 
-      <form id="buy-form" novalidate>
-        <div class="field">
-          <span class="label">Quantity</span>
-          <div class="qty">
-            <button type="button" class="qty-btn" data-step="-1" aria-label="Decrease">−</button>
-            <input id="qty" name="quantity" type="number" value="1" min="1" max="50" inputmode="numeric" aria-label="Quantity">
-            <button type="button" class="qty-btn" data-step="1" aria-label="Increase">+</button>
-          </div>
-        </div>
+      <button class="btn btn-fill btn-lg btn-block" type="submit" id="checkout-btn">
+        Checkout — <span id="total">$24.99</span>
+      </button>
 
-        <label class="field">
-          <span class="label">Google review link <em>optional</em></span>
-          <input id="review-link" name="reviewLink" type="url" placeholder="https://g.page/r/…/review" autocomplete="url">
-        </label>
-
-        <div class="checkout-bar">
-          <div class="checkout-total">
-            <span>Total</span>
-            <strong id="total">$24.99</strong>
-          </div>
-          <button class="btn btn-fill btn-lg" type="submit" id="checkout-btn">
-            Checkout
-          </button>
-        </div>
-
-        <p class="form-error" id="form-error" role="alert" hidden></p>
-        <p class="fine">Free shipping · Stripe · Apple Pay &amp; Google Pay</p>
-      </form>
-    </div>
+      <p class="form-error" id="form-error" role="alert" hidden></p>
+      <p class="fine">Free shipping · Stripe</p>
+    </form>
   </div>
 </main>
 
 <footer class="site-footer">
-  <a class="brand" href="/">trusttaps</a>
   <p>© <span id="year">2026</span> TrustTaps</p>
 </footer>
 

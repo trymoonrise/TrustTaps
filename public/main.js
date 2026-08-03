@@ -3,8 +3,6 @@ const form = document.getElementById('buy-form');
 const checkoutBtn = document.getElementById('checkout-btn');
 const errorEl = document.getElementById('form-error');
 const yearEl = document.getElementById('year');
-const nav = document.getElementById('nav');
-const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const priceEls = {
   unit: document.getElementById('unit-price'),
@@ -14,12 +12,6 @@ const priceEls = {
 let pricing = { unitAmount: 2499, shippingAmount: 0, currency: 'usd' };
 
 if (yearEl) yearEl.textContent = String(new Date().getFullYear());
-
-if (nav) {
-  const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 8);
-  document.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-}
 
 function formatMoney(amountInCents) {
   return new Intl.NumberFormat(undefined, {
@@ -46,29 +38,6 @@ function showError(message) {
   if (!errorEl) return;
   errorEl.textContent = message;
   errorEl.hidden = !message;
-}
-
-const galleryImg = document.getElementById('gallery-img');
-if (galleryImg) {
-  const frame = galleryImg.closest('.gallery-main');
-
-  document.querySelectorAll('.thumb').forEach((thumb) => {
-    thumb.addEventListener('click', () => {
-      if (galleryImg.getAttribute('src') === thumb.dataset.src) return;
-
-      document.querySelectorAll('.thumb').forEach((other) => {
-        other.classList.toggle('is-active', other === thumb);
-        other.setAttribute('aria-selected', String(other === thumb));
-      });
-
-      frame.classList.add('is-swapping');
-      setTimeout(() => {
-        galleryImg.src = thumb.dataset.src;
-        galleryImg.alt = thumb.dataset.alt;
-        frame.classList.remove('is-swapping');
-      }, reducedMotion ? 0 : 160);
-    });
-  });
 }
 
 if (qtyInput) {
