@@ -3,130 +3,108 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>TrustTaps — Google Review Card</title>
+<title>TrustTaps — The Google Review Card</title>
 <meta name="description" content="Get more 5-star Google reviews, instantly. NFC card — customers tap, your review page opens.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/card-hero.webp">
 <link rel="stylesheet" href="styles.css">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%231D4ED8'/><text x='16' y='22' font-size='15' font-family='sans-serif' font-weight='700' fill='%23fff' text-anchor='middle'>T</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23111'/><text x='16' y='22' font-size='15' font-family='sans-serif' font-weight='700' fill='%23ffe500' text-anchor='middle'>T</text></svg>">
 </head>
-<body>
+<body class="page-landing">
 
-<header class="nav">
-  <a class="brand" href="index.html">trusttaps</a>
+<header class="nav" id="nav">
+  <a class="brand" href="index.html"><span class="brand-dot" aria-hidden="true">t</span>trusttaps</a>
   <nav class="nav-links">
-    <a href="#how">How it works</a>
-    <a href="#faq">FAQ</a>
-    <a class="btn btn-fill" href="buy.html">Buy</a>
+    <a class="btn btn-ghost" href="mailto:support@trusttaps.com">Help</a>
+    <a class="btn btn-solid" href="buy.html">Buy a card</a>
   </nav>
 </header>
 
-<main>
-  <section class="hero">
-    <img class="hero-card" src="assets/card-hero.webp" alt="TrustTaps Google review NFC card" width="1200" height="1200" sizes="(min-width: 900px) 440px, (min-width: 720px) 360px, 70vw" fetchpriority="high">
+<main class="snap-main">
 
-    <div class="hero-copy">
-      <p class="eyebrow">NFC + QR · Free shipping</p>
-      <p class="brand-mark">trusttaps</p>
-      <h1>Google Review Card</h1>
-      <p class="lede">Get more 5-star Google reviews, instantly. Stick it on the counter — customers tap, your review page opens.</p>
-      <a class="btn btn-fill btn-lg" href="buy.html">Buy a card — $24.99</a>
+  <section class="panel panel-yellow" id="top" data-theme="light">
+    <div class="panel-stage">
+      <div class="card-stack" aria-label="TrustTaps Google review NFC card">
+        <img class="stack-card stack-left" src="assets/card-hero.webp" alt="" width="1200" height="1200" aria-hidden="true">
+        <img class="stack-card stack-center" src="assets/card-hero.webp" alt="TrustTaps Google review NFC card" width="1200" height="1200" fetchpriority="high">
+        <img class="stack-card stack-right" src="assets/card-hero.webp" alt="" width="1200" height="1200" aria-hidden="true">
+      </div>
+
+      <div class="panel-copy">
+        <h1>The Google<br>Review Card</h1>
+        <p class="lede">Get more 5-star Google reviews, instantly.</p>
+        <p class="qr-label">Order yours</p>
+        <a class="qr-box" href="buy.html" aria-label="Scan to order">
+          <img id="qr-img" src="" alt="" width="120" height="120">
+        </a>
+        <a class="btn btn-solid btn-lg" href="buy.html">Buy a card — $24.99</a>
+      </div>
     </div>
+
+    <a class="scroll-pill" href="#how">How it works <span aria-hidden="true">↓</span></a>
   </section>
 
-  <section class="section" id="how">
-    <div class="section-head">
-      <p class="eyebrow">How it works</p>
-      <h2>Three steps. That’s it.</h2>
+  <section class="panel panel-dark" id="how" data-theme="dark">
+    <div class="panel-inner">
+      <h2>Tap. Review.<br>Done.</h2>
+      <ol class="steps-big">
+        <li><b>1</b> Stick it on the counter</li>
+        <li><b>2</b> Customer taps their phone</li>
+        <li><b>3</b> Your Google review page opens</li>
+      </ol>
+      <a class="btn btn-yellow btn-lg" href="buy.html">Buy a card</a>
     </div>
-    <ol class="steps">
-      <li>
-        <span class="step-num">1</span>
-        <div>
-          <h3>Stick it on the counter</h3>
-          <p>Peel and place. 3M adhesive holds it firm.</p>
-        </div>
-      </li>
-      <li>
-        <span class="step-num">2</span>
-        <div>
-          <h3>Customer taps their phone</h3>
-          <p>Works on iPhone and Android. No app needed.</p>
-        </div>
-      </li>
-      <li>
-        <span class="step-num">3</span>
-        <div>
-          <h3>Your Google review page opens</h3>
-          <p>They leave a review in seconds. You get more 5-stars.</p>
-        </div>
-      </li>
-    </ol>
+    <a class="scroll-pill scroll-pill-light" href="#why">More <span aria-hidden="true">↓</span></a>
   </section>
 
-  <section class="section section-soft">
-    <div class="section-head">
-      <p class="eyebrow">Why TrustTaps</p>
-      <h2>Built for busy businesses</h2>
+  <section class="panel panel-dark panel-glow" id="why" data-theme="dark">
+    <div class="panel-inner panel-split">
+      <div class="panel-copy-wide">
+        <h2>Built for<br>busy counters</h2>
+        <p class="lede lede-light">NFC + QR. No app. No monthly fee. Pay once — unlimited taps.</p>
+      </div>
+      <ul class="perks">
+        <li>No subscription</li>
+        <li>Works on iPhone &amp; Android</li>
+        <li>Change your link anytime</li>
+        <li>Free shipping</li>
+      </ul>
     </div>
-    <div class="features">
-      <article class="feature">
-        <h3>No monthly fee</h3>
-        <p>Pay once. Unlimited taps forever.</p>
-      </article>
-      <article class="feature">
-        <h3>NFC + QR backup</h3>
-        <p>Tap works on modern phones. QR covers the rest.</p>
-      </article>
-      <article class="feature">
-        <h3>Change your link anytime</h3>
-        <p>Email us a new Google review URL — no reprint.</p>
-      </article>
-      <article class="feature">
-        <h3>Ships in 1 business day</h3>
-        <p>Free shipping. Usually arrives in 3–5 days.</p>
-      </article>
-    </div>
+    <a class="scroll-pill scroll-pill-light" href="#faq">FAQ <span aria-hidden="true">↓</span></a>
   </section>
 
-  <section class="section" id="faq">
-    <div class="section-head">
-      <p class="eyebrow">FAQ</p>
-      <h2>Common questions</h2>
+  <section class="panel panel-yellow" id="faq" data-theme="light">
+    <div class="panel-inner">
+      <h2>Questions</h2>
+      <div class="faq faq-dark">
+        <details>
+          <summary>Does it work with every phone?</summary>
+          <p>iPhone XR and newer, and nearly all Android. Older phones use the printed QR.</p>
+        </details>
+        <details>
+          <summary>Do I need an app?</summary>
+          <p>No. The card opens Google in the browser.</p>
+        </details>
+        <details>
+          <summary>How do I set my review link?</summary>
+          <p>Add it at checkout or email us after you order.</p>
+        </details>
+        <details>
+          <summary>Is there a monthly fee?</summary>
+          <p>No. One payment. Unlimited taps.</p>
+        </details>
+      </div>
+      <a class="btn btn-solid btn-lg" href="buy.html">Buy a card — $24.99</a>
     </div>
-    <div class="faq">
-      <details>
-        <summary>Does it work with every phone?</summary>
-        <p>iPhone XR and newer, and nearly all Android phones. Older phones can scan the printed QR code.</p>
-      </details>
-      <details>
-        <summary>Do I need an app?</summary>
-        <p>No. The card opens Google in the phone’s browser.</p>
-      </details>
-      <details>
-        <summary>How do I set my review link?</summary>
-        <p>Add it at checkout, or email us after you order. We program the card before it ships.</p>
-      </details>
-      <details>
-        <summary>Is there a monthly fee?</summary>
-        <p>No. One payment, unlimited taps.</p>
-      </details>
-    </div>
+    <footer class="panel-footer">
+      <a href="mailto:support@trusttaps.com">Support</a>
+      <p>© <span id="year">2026</span> TrustTaps</p>
+    </footer>
   </section>
 
-  <section class="cta-band">
-    <h2>Ready for more reviews?</h2>
-    <p>One card on the counter can change how customers leave feedback.</p>
-    <a class="btn btn-fill btn-lg" href="buy.html">Buy a card — $24.99</a>
-  </section>
 </main>
-
-<footer class="site-footer">
-  <a href="mailto:support@trusttaps.com">Support</a>
-  <p>© <span id="year">2026</span> TrustTaps</p>
-</footer>
 
 <script src="main.js"></script>
 </body>

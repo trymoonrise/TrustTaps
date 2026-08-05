@@ -14,9 +14,33 @@ const API_BASE = window.location.hostname.endsWith('github.io')
   ? 'https://trusttaps.onrender.com'
   : '';
 
-let pricing = { unitAmount: 2499, shippingAmount: 0, currency: 'usd' };
-
 if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+const qrImg = document.getElementById('qr-img');
+if (qrImg) qrImg.src = `${API_BASE}/qr.svg`;
+
+const landingNav = document.getElementById('nav');
+if (landingNav?.closest('.page-landing')) {
+  const panels = document.querySelectorAll('.panel[data-theme]');
+  const setTheme = (theme) => landingNav.setAttribute('data-theme', theme);
+
+  if ('IntersectionObserver' in window && panels.length) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setTheme(visible.target.dataset.theme);
+      },
+      { rootMargin: '-40% 0px -40% 0px', threshold: [0, 0.25, 0.5] },
+    );
+    panels.forEach((panel) => observer.observe(panel));
+  } else if (panels[0]) {
+    setTheme(panels[0].dataset.theme);
+  }
+}
+
+let pricing = { unitAmount: 2499, shippingAmount: 0, currency: 'usd' };
 
 function siteOrigin() {
   const dir = window.location.pathname.replace(/\/[^/]*$/, '');
