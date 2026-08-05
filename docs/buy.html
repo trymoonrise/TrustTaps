@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Buy — TrustTaps</title>
+<meta name="description" content="Order your Google Review NFC card. Pay securely with Stripe. Free shipping.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/card-hero.webp">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%231D4ED8'/><text x='16' y='22' font-size='15' font-family='sans-serif' font-weight='700' fill='%23fff' text-anchor='middle'>T</text></svg>">
+</head>
+<body class="page-buy">
+
+<header class="nav">
+  <a class="brand" href="index.html">trusttaps</a>
+  <a class="btn btn-quiet" href="mailto:support@trusttaps.com">Support</a>
+</header>
+
+<main class="buy">
+  <img class="buy-card" src="assets/card-hero.webp" alt="TrustTaps Google review NFC card" width="1200" height="1200" sizes="(min-width: 900px) 400px, (min-width: 720px) 340px, 68vw" fetchpriority="high">
+
+  <div class="buy-copy">
+    <h1>Google Review Card</h1>
+    <p class="price"><span id="unit-price">$24.99</span></p>
+    <p class="lede">NFC + QR. Stick it on the counter. Customers tap. Done.</p>
+
+    <form id="buy-form" novalidate>
+      <div class="qty" aria-label="Quantity">
+        <button type="button" class="qty-btn" data-step="-1" aria-label="Decrease">−</button>
+        <input id="qty" name="quantity" type="number" value="1" min="1" max="50" inputmode="numeric" aria-label="Quantity">
+        <button type="button" class="qty-btn" data-step="1" aria-label="Increase">+</button>
+      </div>
+
+      <button class="btn btn-fill btn-lg btn-block" type="submit" id="checkout-btn">
+        Buy — <span id="total">$24.99</span>
+      </button>
+
+      <p class="form-error" id="form-error" role="alert" hidden></p>
+      <p class="fine">Free shipping · Review link added at checkout</p>
+    </form>
+  </div>
+</main>
+
+<script src="main.js"></script>
+</body>
+</html>
