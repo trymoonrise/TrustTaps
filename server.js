@@ -23,8 +23,17 @@ const stripeKey = process.env.STRIPE_SECRET_KEY;
 const stripe = stripeKey ? new Stripe(stripeKey) : null;
 
 const app = express();
-app.use(express.json());
+app.set('trust proxy', 1);
+app.use(express.json({ limit: '16kb' }));
 app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }));
+
+app.get('/health', (_req, res) => {
+  res.json({
+    ok: true,
+    stripe: Boolean(stripe),
+    baseUrl: BASE_URL || null,
+  });
+});
 
 /**
  * The origin the visitor actually reached us on, so QR codes and Stripe
@@ -134,7 +143,18 @@ app.post('/api/checkout', async (req, res) => {
   }
 });
 
+app.use((error, _req, res, next) => {
+  if (error?.type === 'entity.parse.failed') {
+    return res.status(400).json({ error: 'Invalid request body.' });
+  }
+  return next(error);
+});
+
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`TrustTaps running on ${BASE_URL || `http://localhost:${PORT}`}`);
-  if (!stripe) console.warn('STRIPE_SECRET_KEY is missing — the checkout button will return an error.');
+  const origin = BASE_URL || `http://localhost:${PORT}`;
+  console.log(`TrustTaps running on ${origin}`);
+  if (!stripe) console.warn('STRIPE_SECRET_KEY is missing — checkout will fail.');
+  else if (!stripeKey.startsWith('sk_') && !stripeKey.startsWith('rk_')) {
+    console.warn('STRIPE_SECRET_KEY does not look like a Stripe key.');
+  }
 });

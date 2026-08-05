@@ -5,7 +5,7 @@ services:
     plan: free
     buildCommand: npm ci
     startCommand: npm start
-    healthCheckPath: /
+    healthCheckPath: /health
     envVars:
       - key: NODE_VERSION
         value: "22"
@@ -22,4 +22,4 @@ services:
       - key: STRIPE_PUBLISHABLE_KEY
         sync: false
       - key: BASE_URL
-        sync: false
+        value: https://trusttaps.onrender.com

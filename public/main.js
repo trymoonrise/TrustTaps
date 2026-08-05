@@ -40,6 +40,43 @@ function showError(message) {
   errorEl.hidden = !message;
 }
 
+async function readJson(response) {
+  const text = await response.text();
+  if (!text) return {};
+  try {
+    return JSON.parse(text);
+  } catch {
+    if (response.status >= 500 || response.status === 503) {
+      throw new Error('The site is waking up — wait a few seconds and try again.');
+    }
+    throw new Error('Unexpected server response. Please refresh and try again.');
+  }
+}
+
+async function startCheckout(attempt = 1) {
+  const response = await fetch('/api/checkout', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      quantity: clampQty(qtyInput?.value ?? 1),
+      reviewLink: '',
+    }),
+  });
+
+  const data = await readJson(response);
+
+  if (!response.ok || !data.url) {
+    const retryable = response.status >= 500 || response.status === 503;
+    if (retryable && attempt < 3) {
+      await new Promise((resolve) => setTimeout(resolve, attempt * 1500));
+      return startCheckout(attempt + 1);
+    }
+    throw new Error(data.error || 'Could not start checkout.');
+  }
+
+  window.location.href = data.url;
+}
+
 if (qtyInput) {
   document.querySelectorAll('.qty-btn').forEach((button) => {
     button.addEventListener('click', () => {
@@ -65,20 +102,9 @@ if (form) {
     checkoutBtn.textContent = 'Redirecting…';
 
     try {
-      const response = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          quantity: clampQty(qtyInput.value),
-          reviewLink: '',
-        }),
-      });
-
-      const data = await response.json();
-      if (!response.ok || !data.url) throw new Error(data.error || 'Could not start checkout.');
-      window.location.href = data.url;
+      await startCheckout();
     } catch (error) {
-      showError(`${error.message} Please try again or email support@trusttaps.com.`);
+      showError(`${error.message} Or email support@trusttaps.com.`);
       checkoutBtn.disabled = false;
       checkoutBtn.innerHTML = originalLabel;
     }
