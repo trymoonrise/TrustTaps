@@ -24,6 +24,23 @@ const stripe = stripeKey ? new Stripe(stripeKey) : null;
 
 const app = express();
 app.set('trust proxy', 1);
+
+const ALLOWED_ORIGINS = [
+  'https://trymoonrise.github.io',
+  'https://trusttaps.onrender.com',
+];
+
+app.use((req, res, next) => {
+  const origin = req.get('origin');
+  if (origin && (ALLOWED_ORIGINS.some((allowed) => origin.startsWith(allowed)) || origin.endsWith('.github.io'))) {
+    res.set('Access-Control-Allow-Origin', origin);
+    res.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.set('Access-Control-Allow-Headers', 'Content-Type');
+  }
+  if (req.method === 'OPTIONS') return res.sendStatus(204);
+  return next();
+});
+
 app.use(express.json({ limit: '16kb' }));
 app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }));
 
@@ -90,6 +107,11 @@ app.post('/api/checkout', async (req, res) => {
   const quantity = Math.min(MAX_QUANTITY, Math.max(1, Number.parseInt(req.body?.quantity, 10) || 1));
   const reviewLink = typeof req.body?.reviewLink === 'string' ? req.body.reviewLink.slice(0, 400) : '';
   const base = BASE_URL || originFrom(req);
+  const returnOrigin = typeof req.body?.returnOrigin === 'string' ? req.body.returnOrigin.slice(0, 200) : '';
+  const redirectBase =
+    returnOrigin && /^https:\/\/[\w.-]+\.github\.io(\/[\w.-]*)?\/?$/i.test(returnOrigin)
+      ? returnOrigin.replace(/\/$/, '')
+      : base;
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -132,8 +154,8 @@ app.post('/api/checkout', async (req, res) => {
             },
           ],
       metadata: { reviewLink },
-      success_url: `${base}/success.html?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${base}/buy`,
+      success_url: `${redirectBase}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${redirectBase}/buy.html`,
     });
 
     res.json({ url: session.url });

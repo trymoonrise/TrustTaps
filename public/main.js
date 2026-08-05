@@ -9,9 +9,19 @@ const priceEls = {
   total: document.getElementById('total'),
 };
 
+/** GitHub Pages is static — checkout runs on Render. */
+const API_BASE = window.location.hostname.endsWith('github.io')
+  ? 'https://trusttaps.onrender.com'
+  : '';
+
 let pricing = { unitAmount: 2499, shippingAmount: 0, currency: 'usd' };
 
 if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+function siteOrigin() {
+  const dir = window.location.pathname.replace(/\/[^/]*$/, '');
+  return `${window.location.origin}${dir}`;
+}
 
 function formatMoney(amountInCents) {
   return new Intl.NumberFormat(undefined, {
@@ -54,13 +64,16 @@ async function readJson(response) {
 }
 
 async function startCheckout(attempt = 1) {
-  const response = await fetch('/api/checkout', {
+  const payload = {
+    quantity: clampQty(qtyInput?.value ?? 1),
+    reviewLink: '',
+  };
+  if (API_BASE) payload.returnOrigin = siteOrigin();
+
+  const response = await fetch(`${API_BASE}/api/checkout`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      quantity: clampQty(qtyInput?.value ?? 1),
-      reviewLink: '',
-    }),
+    body: JSON.stringify(payload),
   });
 
   const data = await readJson(response);
@@ -111,7 +124,7 @@ if (form) {
   });
 }
 
-fetch('/api/config')
+fetch(`${API_BASE}/api/config`)
   .then((response) => (response.ok ? response.json() : null))
   .then((config) => {
     if (!config) return;
